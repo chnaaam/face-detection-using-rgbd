@@ -1,4 +1,4 @@
-# 깊이 정보를 이용한 얼굴 인식 모델
+# Face Detection using RGB-D
 <br/>
 
 
