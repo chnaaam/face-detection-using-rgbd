@@ -25,10 +25,16 @@ def collate_fn(data):
 
         for rgb_img, depth_img, annotations in data:
             batched_rgb_img.append(rgb_img.permute(2, 0, 1).float())
-            batched_depth_img.append(depth_img.permute(2, 0, 1).float())
+
+            if depth_img:
+                batched_depth_img.append(depth_img.permute(2, 0, 1).float())
+
             batched_annotations.append(annotations.float())
 
-        return torch.stack(batched_rgb_img), torch.stack(batched_depth_img), batched_annotations
+        if batched_depth_img:
+            return torch.stack(batched_rgb_img), torch.stack(batched_depth_img), batched_annotations
+        else:
+            return torch.stack(batched_rgb_img), None, batched_annotations
 
 class WiderDataset(Dataset):
     def __init__(self, path, mode="val", transforms=None, with_depth_info=False):
@@ -102,7 +108,7 @@ class WiderDataset(Dataset):
             if self.transforms:
                 img, targets = self.transforms((img, np.array(targets)))
 
-            return img, targets
+            return img, None, targets
 
         else:
             rgb_img = skimage.io.imread(os.path.join(self.dataset_path, "images", img_name))

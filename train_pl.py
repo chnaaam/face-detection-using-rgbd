@@ -6,7 +6,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 
 from config import load_config
 from face_detection_data_module import FaceDetectionDataModule
-from face_detectior_trainer import FaceDetectorTrainer
+from face_detector_trainer import FaceDetectorTrainer
 
 def fix_seeds():
     torch.manual_seed(0)

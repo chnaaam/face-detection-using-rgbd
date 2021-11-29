@@ -28,7 +28,7 @@ class FaceDetectionDataModule(pl.LightningDataModule):
         return DataLoader(
             dataset=self.train_dataset,
             batch_size=self.batch_size,
-            num_workers=8,
+            num_workers=0,
             collate_fn=collate_fn,
             shuffle=True,
             pin_memory=True)
@@ -37,7 +37,7 @@ class FaceDetectionDataModule(pl.LightningDataModule):
         return DataLoader(
             dataset=self.valid_dataset,
             batch_size=self.batch_size,
-            num_workers=8,
+            num_workers=0,
             collate_fn=collate_fn,
             shuffle=False,
             pin_memory=True)

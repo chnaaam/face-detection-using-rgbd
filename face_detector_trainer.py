@@ -26,7 +26,7 @@ class FaceDetectorTrainer(pl.LightningModule):
     def training_step(self, batch, batch_idx):
 
         if not self.with_depth_info:
-            rgb_imgs, annotations = batch
+            rgb_imgs, _, annotations = batch
 
             total_classification_loss, total_bbox_reg_loss = self.forward(
                 rgb_imgs=rgb_imgs,
@@ -48,7 +48,7 @@ class FaceDetectorTrainer(pl.LightningModule):
 
     def validation_step(self, batch, batch_idx):
         if not self.with_depth_info:
-            rgb_imgs, annotations = batch
+            rgb_imgs, _, annotations = batch
 
             total_classification_loss, total_bbox_reg_loss = self.forward(
                 rgb_imgs=rgb_imgs,
